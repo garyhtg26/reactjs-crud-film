@@ -1,0 +1,18 @@
+{
+  "films": [
+    {
+      "id": 1,
+      "judul": "Doctor Strage MOM",
+      "sinopsis": "Film marvel yang disurtradarai oleh sam raimu",
+      "genre": "Horror",
+      "umur": "17+"
+    },
+    {
+      "id": 2,
+      "judul": "KKN Desa Penari",
+      "sinopsis": "Film tentang nari nari",
+      "genre": "Horror",
+      "umur": "21+"
+    }
+  ]
+}
