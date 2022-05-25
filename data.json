@@ -13,6 +13,13 @@
       "sinopsis": "Film tentang nari nari",
       "genre": "Horror",
       "umur": "21+"
+    },
+    {
+      "id": "9ece109ac8b",
+      "judul": "dsa",
+      "sinopsis": "dsa",
+      "genre": "ds",
+      "umur": "14+"
     }
   ]
 }

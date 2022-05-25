@@ -38,9 +38,9 @@ function App() {
   function AddForm() {
     setFormData([...formData, { judul: "", sinopsis: "", genre: "", umur:""}])
   }
-  function handleChange(e) {
-    let newFormState = { ...formData };
-    newFormState[e.target.name] = e.target.value;
+  function handleChange(index,event) {
+    let newFormState = [...formData ];
+    newFormState[index][event.target.name] = event.target.value;
     setFormData(newFormState);
   }
 
@@ -60,47 +60,51 @@ function App() {
     if (formData.umur === "") {
       return false;
     }
-
+    //validasi
     if (isUpdate.status) {
       data.forEach((film) => {
+        console.log(data,'editdata')
         if (film.id === isUpdate.id) {
-          film.judul = formData.judul;
-          film.sinopsis = formData.sinopsis;
-          film.genre = formData.genre;
-          film.umur = formData.umur;
+          film.judul = formData[0].judul;
+          film.sinopsis = formData[0].sinopsis;
+          film.genre = formData[0].genre;
+          film.umur = formData[0].umur;
         }
       });
       api
         .put("/films/" + isUpdate.id, {
           id: isUpdate.id,
-          judul: formData.judul,
-          sinopsis: formData.sinopsis,
-          genre: formData.genre,
-          umur: formData.umur,
+          judul: formData[0].judul,
+          sinopsis: formData[0].sinopsis,
+          genre: formData[0].genre,
+          umur: formData[0].umur,
         })
         .then(() => {
           alert("Data berhasil di update");
+          window.location.href = "/"
         });
       // update berdasarkan id
-    } else {
+    } else {  
       let toSave = {
         id: uid(),
-        judul: formData.judul,
-          sinopsis: formData.sinopsis,
-          genre: formData.genre,
-          umur: formData.umur,
+        judul: formData[0].judul,
+          sinopsis: formData[0].sinopsis,
+          genre: formData[0].genre,
+          umur: formData[0].umur,
       };
+      console.log(toSave,'yangdikirim')
       data.push(toSave);
 
       // menambahkan data
       api.post("/films", toSave).then(() => {
+        console.log(data,'dipush')
         alert("Data berhasil ditambah");
         window.location.href = "/"
       });
     }
-    setFilms(data);
+    setFilms([...films,data]);
     setIsUpdate(false);
-    setFormData({ judul: "", sinopsis: "", genre: "", umur:"" });
+    setFormData([{ judul: "", sinopsis: "", genre: "", umur:"" }]);
   }
 
   function handleEdit(id) {
@@ -110,7 +114,7 @@ function App() {
     let data = [...films];
     let foundData = data.find((film) => film.id === id);
     setIsUpdate({ status: true, id: id });
-    setFormData({ judul: foundData.judul, sinopsis: foundData.sinopsis, genre: foundData.genre, umur: foundData.umur });
+    setFormData([{ judul: foundData.judul, sinopsis: foundData.sinopsis, genre: foundData.genre, umur: foundData.umur }]);
   }
 
   function handleDelete(id) {

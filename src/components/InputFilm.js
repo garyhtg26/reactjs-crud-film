@@ -5,7 +5,7 @@ export default function InputFilm({ data, handleChange, handleSubmit, AddForm}) 
     <div className="" >
         <h1 className="h2">Input Film</h1>
         <form onSubmit={handleSubmit} className="px-3 py-4">
-
+        {console.log(data)}
         { data.map((data,index) => {
             return (
         
@@ -14,7 +14,7 @@ export default function InputFilm({ data, handleChange, handleSubmit, AddForm}) 
             <label htmlFor="">Judul Film</label>
             <input
               type="text"
-              onChange={handleChange}
+              onChange={e => handleChange(index, e)}
               className="form-control"
               value={data.judul}
               name="judul"
@@ -24,7 +24,7 @@ export default function InputFilm({ data, handleChange, handleSubmit, AddForm}) 
             <label htmlFor="">Sinopsis</label>
             <input
               type="text"
-              onChange={handleChange}
+              onChange={event => handleChange(index, event)}
               value={data.sinopsis}
               className="form-control"
               name="sinopsis"
@@ -34,7 +34,7 @@ export default function InputFilm({ data, handleChange, handleSubmit, AddForm}) 
             <label htmlFor="">Genre</label>
             <input
               type="text"
-              onChange={handleChange}
+              onChange={e => handleChange(index, e)}
               value={data.genre}
               className="form-control"
               name="genre"
@@ -44,7 +44,7 @@ export default function InputFilm({ data, handleChange, handleSubmit, AddForm}) 
             <label htmlFor="">Umur</label>
             <input
               type="text"
-              onChange={handleChange}
+              onChange={e => handleChange(index, e)}
               value={data.umur}
               className="form-control"
               name="umur"
